@@ -1,0 +1,101 @@
+Terminal de comandos
+
+Windows -> cmd
+
+dir – mostra os diretórios (pastas) contidos onde estamos situados.
+
+cd (change directory) – muda o diretório, mas não mostra seu conteúdo. Para mostrar, é preciso usar novamente “dir”
+
+Para entrar numa pasta específica, digitamos “cd” e o nome da pasta. Ex: cd Windows.
+Podemos usar o tab para autocompletar. Se digitarmos W e depois tab, ele vai completar com a primeira opção disponível. 
+Se não for a que você quer, é só ir dando tab até aparecer a opção correta.
+
+Retroceder um nível: “..” (dois pontos)
+Limpar tela: “cls” (clear screen)
+Criar pasta: “mkdir” (make directory). “mkdir workspace” cria uma pasta chamada workspace, por exemplo.
+echo: imprime na tela o que for digitado em seguida (ex: echo Hello World)
+echo hello > hello.txt (cria um arquivo txt com o nome hello e o conteúdo hello)
+Deletar conteúdo de uma pasta (mas a pasta em si continua a existir): del nome da pasta 
+Histórico de comandos: seta pra cima
+
+Deletar diretório com todo o conteúdo: rmdir (remove dir) [quando tentei isso mais o nome do diretório, cmd não deixou – disse que pasta não estava vazia. 
+Ele fez isso usando duas flags: rmdir workspace /S /Q
+
+Windows	                        Linux
+cd	                        cd
+dir	                        ls
+cls	                        clear (ou Ctrl + l)
+mkdir	                        mkdir
+Rmdir nomedapasta /S /Q *	rm nome da pasta -rf **
+
+
+*S =subdirectories (apaga todas as subpastas)
+Q = quiet mode (não pede confirmação para fazer as ações)
+**R de recursive = aplica isso infinitas vezes, enquanto houver pastas e arquivos dentro
+F de force = forçar o delete, sem precisar mostrar mensagens de confirmação
+
+
+SHA1 = Secure Hash Algoritm (Algoritmo de Hash Seguro). É um conjunto de funções hash criptográficas projetadas pela NSA (Agência de Segurança Nacional dos EUA). 
+A encriptação gera um conjunto identificador de 40 caracteres.
+
+
+Pra ver isso no cmd ou git: “open ss1 sha1 nomedoarquivo”
+
+Vai mostrar os 40 caracteres identificadores. Se mudar uma vírgula e pedir pra mostrar de novo, vai mostrar uma nova sequência de caracteres. Se mudar para o que 
+estava originalmente, ele vai mostrar a mesma sequência de 40 caracteres original. Assim é possível verificar que um arquivo está exatamente igual a uma versão 
+anterior.
+
+Três objetos básicos do Git: blobs, trees e commits. São os responsáveis pelo versionamento do código.
+
+O git guarda arquivos fazendo sha1 (gerando encriptação) e também gerando metadados nos objetos (blob = tipo do objeto, tamanho da string, tamanho do arquivo, 
+entre outros. Não guarda o nome do arquivo).
+
+As trees armazenam blobs e o nome do arquivo. Elas podem apontar para blobs ou para outras árvores (as árvores são objetos recursivos. Do mesmo jeito que um 
+diretório pode levar para outro diretório, assim fazem as árvores). As árvores também têm um sha1 interno.
+
+Commit – o objeto mais importantes de todos. É o que vai juntar tudo, vai dar sentido para a alteração. Ele aponta para um árvore, para um parente (o último 
+commit realizado antes dele), aponta para um autor, aponta para uma mensagem, e tem um timestamp (data e hora de quando foi criado). Eles também possuem sha1, 
+uma encriptação de seus metadados.
+
+Chave SSH
+
+Estabelece uma conexão segura e encriptada entre duas máquinas (nossa máquina e o GitHub). Há uma chave pública e uma privada.
+
+Comandos git:
+
+Quando usamos um terminal, colocamos sempre o nome do programa primeiro. Portanto, todo comando do git leva git primeiro.
+
+git init = cria um repositório do git dentro da pasta selecionada (e cria um arquivo oculto .git)
+git add = 
+git commit = 
+
+-a (flag para mostrar itens ocultos). Ex: “ls -a” vai mostrar itens ocultos dentro da pasta.
+
+git add * ( o asterisco faz mover tudo o que está na working tree para staged)
+git commit -m “commit inicial” (esse -m indica a mensagem que vai ser escrita)
+
+Repositório remoto > está no servidor
+
+Ambiente de desenvolvimento > working directory (onde você trabalha o arquivo) / staging area (quando você dá add, você manda pra área de stage, como se fosse 
+uma preparação para poderem ser usados/ local repository (o arquivo é enviado para o seu repositório local)
+
+git status = diz se arquivo está untracked, modified, staged etc. Untracked é uma coisa que foi criada depois do último commit, o git ainda não reconhece o que é
+aquilo
+
+mv francesinha.md ./receitas/ (mover arquivo para a pasta)
+
+
+Mandar para o github:
+
+Ir em github, new repository.
+
+Em git bash:
+
+git remote add origin https://github.com/emmanuelgallo/livro-receitas.git (link copiado do github. Origin é o apelido para ser usado no lugar do link, é escrito 
+origin por convenção)
+
+git remote -v (pra conferir o que está lá)
+
+git push origin master (vai “empurrar” para o github. Master é a Branch que estamos utilizando)
+
+Clonar algo através do git bash: git clone http://...
